@@ -12,7 +12,7 @@
 {% endblock %}
 {% block body %}
     <h1>register</h1>
-    <form method="post">
+    <form method="post" novalidate>   {#    novalidate to able django user auth#}
         {% csrf_token %}
         {{ form }}
         <button type="submit">register</button>

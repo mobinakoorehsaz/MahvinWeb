@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}ورود{% endblock %}
+{% block body %}<h1>login</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <label>
+            <input type="text" name="user" placeholder="نام کاربری">
+        </label><br><br>
+        <label>
+            <input type="password" name="password" placeholder="گذرواژه">
+        </label><br><br>
+        {#        {{ form.user }}<br><br>#}
+        {#        {{ form.password }}<br>#}
+        {#    {{ form.as_p }}#}
+        <button type="submit">ورود</button>
+    </form>
+{% endblock %}

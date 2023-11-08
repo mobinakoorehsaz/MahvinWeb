@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 
 
 class UserRegisterForm(forms.Form):
-    username = forms.CharField(max_length=50)
+    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'نام کاربری'}))
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
-    email = forms.EmailField()
-    password_1 = forms.CharField(max_length=50)
-    password_2 = forms.CharField(max_length=50)
-    phone = forms.PhoneNumberField()
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'example@email.com'}))
+    password_1 = forms.CharField(max_length=50,
+                                 widget=forms.PasswordInput(attrs={'placeholder': 'گذرواژه را وارد کنید'}))
+    password_2 = forms.CharField(max_length=50,
+                                 widget=forms.PasswordInput(attrs={'placeholder': ' تکرار گذرواژه را وارد کنید'}))
 
     def clean_username(self):
         user = self.cleaned_data['username']
@@ -33,3 +34,8 @@ class UserRegisterForm(forms.Form):
         elif not any(x.isupper() for x in password1):
             raise forms.ValidationError(' گذرواژه باید حداقل یک حرف بزرگ داشته باشد')
         return password1
+
+
+class UserLoginForm(forms.Form):
+    user = forms.CharField()
+    password = forms.CharField()
