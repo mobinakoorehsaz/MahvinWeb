@@ -13,8 +13,10 @@ def user_register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            User.objects.create_user(username=data['username'], first_name=data['first_name'],
-                                     last_name=data['last_name'], email=data['email'], password=data['password_1'])
+            user = User.objects.create_user(username=data['username'], first_name=data['first_name'],
+                                            last_name=data['last_name'], email=data['email'],
+                                            password=data['password_1'])
+            user.save()
             return redirect("home:home")
     else:
         form = UserRegisterForm()
